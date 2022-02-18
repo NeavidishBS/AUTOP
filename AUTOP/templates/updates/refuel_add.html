@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+
+
+{% block body %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{refuel_formset.management_form}}
+    {% for form in refuel_formset %}
+    <div class="purchase-form">
+        {% for hidden in form.hidden_fields %}
+        {{hidden}}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+        <div>
+        {{field.errors}}
+        {{field.label_tag}}
+        {{field}}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit">Add</button>
+</form>
+
+{% endblock body %}

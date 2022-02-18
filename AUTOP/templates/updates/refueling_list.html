@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+
+
+
+{% block body_heading %}
+        Updates
+{% endblock body_heading %}
+
+{% block body %}
+<div class="purchase-horizontal-grid">
+    <div>Date</div>
+    <div>Vehicle</div>
+    <div>Fuel</div>
+    <div>Edit</div>
+    <div>Delete</div>
+</div>
+{% for refueling in refuelings %}
+
+<div class="purchase-horizontal-grid">
+    <div>{{refueling.date}}</div>
+    <div>{{refueling.u_vechicle}}</div>
+    <div>{{refueling.fuel}}</div>
+    <div><a href='{% url "refuel_edit" pk=refueling.id %}'>Edit</a></div>
+    <div><a href='{% url "upt_delete" pk=refueling.id %}'>Delete</a></div>
+</div>
+{% endfor %}
+</div>
+{% endblock body %}

@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+
+</head>
+<body>
+
+    <div class="main-container">
+        <div>
+            <ul class="nav-list">
+                <li><a href='{% url "refueling_list" %}'>Refueling List</a></li>
+                <li><a href='{% url "milage_list" %}'>Milage List</a></li>
+                <li><a href='{% url "refuel_add" %}'>Add Refueling</a></li>
+                <li><a href='{% url "milage_add" %}'>Update Milage</a></li>
+                <li><a href='{% url "vehicle_add" %}'>Vehicle Add</a></li>
+                <li><a href=>Monthly Create</a></li>
+
+            </ul>
+        </div>
+
+        <div>
+            <div class="page-header">
+                {% block header %}
+                {% endblock header %}
+            </div>
+            {% block heading_nav %}
+            {% endblock heading_nav %}
+            <div class="content-container">
+                <div class="content">
+                    {% block body %}
+                    {% endblock body %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
