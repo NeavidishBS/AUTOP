@@ -171,7 +171,7 @@ class MilageAddView(TemplateView):
 #     model = refueling, milage_update
 #     context_object_name = "monthly_updates"
 #     form_class = RefuelingForm, MilageForm
-#     template_name = "budgets/monthly_budget_detail.html"
+#     template_name = "budgets/monthly_updtae_detail.html"
 
 #     def get(self, request, *args, **kwargs):
 #         self.object = update_m.objects.get(
@@ -201,7 +201,7 @@ class MilageAddView(TemplateView):
 
 #         updateitems = (
 #             (
-#                 update_all.objects.filter(monthly_budget=self.object)
+#                 update_all.objects.filter(monthly_update=self.object)
 #                 .annotate(
 #                     spent=ExpressionWrapper(
 #                         Coalesce(
