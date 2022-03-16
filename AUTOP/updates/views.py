@@ -123,12 +123,12 @@ class UpdateDetailView(CreateView):
         for p in category_vehicle:
             print(p)
 
-        budgetitems = (
+        uptitems = (
             (
                 refueling.objects.filter(
                     vehicle_category=self.object)
                 .annotate(
-                    spent=ExpressionWrapper(
+                    dist=ExpressionWrapper(
                         Coalesce(
                             Subquery(
                                 category_vehicle.annotate(total="milage_total").values(
@@ -139,7 +139,7 @@ class UpdateDetailView(CreateView):
                         ),
                         output_field=DecimalField(),
                     ),
-                    diff=F("spent"),
+                    diff=F("dist"),
                 )
             ).select_related()
         ).order_by("category__name")
