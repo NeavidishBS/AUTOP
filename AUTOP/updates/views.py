@@ -100,7 +100,7 @@ class RefuelAddView(TemplateView):
             return self.render_to_response({"refuel_formset": formset})
 
 
-#TEST
+#TEST DON'T WORKING YET
 class UpdateDetailView(CreateView):
     model = refueling
     context_object_name = "refuelings"
