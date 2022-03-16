@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+
+
+
+{% block body_heading %}
+        Updates
+{% endblock body_heading %}
+
+{% block body %}
+<div class="purchase-horizontal-grid">
+    <div>Date</div>
+    <div>Vehicle Index</div>
+    <div>Vehicle</div>
+    <div>Edit</div>
+    <div>Delete</div>
+</div>
+{% for refueling in refuelings %}
+
+<div class="purchase-horizontal-grid">
+    <div>{{refueling.date}}</div>
+    <div>{{refueling.u_vechicle}}</div>
+    <div>{{refueling.fuel}}</div>
+    <div>{{refueling.refueling}}</div>
+    <div>{{refueling.milage_total}}</div>
+    <!-- <div><a href='{% url "milage_edit" pk=mileage.id %}'>Edit</a></div>
+    <div><a href='{% url "upt_delete" pk=mileage.id %}'>Delete</a></div> -->
+</div>
+{% endfor %}
+
+<!-- {% for fuelprice_item in fuelprice_items%}
+<div class="budget-horizontal-grid-monthly">
+    <div><a data-tooltip="{{budget_item.category}}" href='{% url "budget_item_detail" year=monthly_budget.date.year month=monthly_budget.date.month category=budget_item.category.name %}'>{{budget_item.category}}</a></div>
+    <div>${{fuelprice_item.diff}}</div>
+</div>
+{% endfor %} -->
+</div>
+{% endblock body %}

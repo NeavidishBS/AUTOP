@@ -37,44 +37,80 @@ class VehicleAddView(TemplateView):
         else:
             return self.render_to_response({"vehicle_formset": formset})
 
+# DO NOT USE
+# class VehicleDetailView(CreateView):
+#     model = Vehicle
+#     context_object_name = "vehicles"
+#     template_name = "updates/vehicle_detail.html"
+#     form_class = VehicleForm
 
-class VehicleDetailView(CreateView):
-    model = Vehicle
-    context_object_name = "vehicles"
-    template_name = "updates/vehicle_detail.html"
-    form_class = VehicleForm
 
+#     # def get(self, request, *args, **kwargs):
 
-    # def get(self, request, *args, **kwargs):
-
-    #     self.object = Fuel.objects.get(
-    #         type=self.kwargs.get("type"),
-    #     )
-    #     return self.render_to_response(self.get_context_data())
+#     #     self.object = Vehicle.objects.get(
+#     #         car_index=self.kwargs.get("id"),
+#     #     )
+#     #     return self.render_to_response(self.get_context_data())
         
-    # def get_context_data(self, **kwargs):
-    #     kwargs = super().get_context_data(**kwargs)
+#     def get_context_data(self, **kwargs):
+#         kwargs = super().get_context_data(**kwargs)
 
-    #     category_fuel_price = Car.objects.filter(
-    #         fuel_type=OuterRef("type"),
-    #     ).values("type")
+#         category_fuel_price = Fuel.objects.filter()
+#         category_fuel_capacity = Car.objects.filter(
+#         )
+#         # for p in category_fuel_price:
+#         #     print(p.type)
 
+#         fuelpriceitem = (
+#                     (
+#                         Vehicle.objects
+#                         .annotate(
+#                             fuel_t=ExpressionWrapper(
+#                                 Coalesce(
+#                                     Subquery(
+#                                         category_fuel_price.annotate(total=("price")).values(
+#                                             "total"
+#                                         )
+#                                     ),
+#                                     Value(0),
+#                                 ),
+#                                 output_field=DecimalField(),
+#                             ),
+#                             cap_t=ExpressionWrapper(
+#                                 Coalesce(
+#                                     Subquery(
+#                                         category_fuel_capacity.annotate(total=("petrol_capacity")).values(
+#                                             "total"
+#                                         )
+#                                     ),
+#                                     Value(0),
+#                                 ),
+#                                 output_field=DecimalField(),
+#                             ),
+#                             diff=F("fuel_t") * F("cap_t"),
+#                         )
+#                     ).select_related()
+#                 ).order_by("category__name")
 
-    #     vehiclemilageitem = (
-    #         (Vehicle.objects.filter).filter(car=self.object)
-    #             .annotate(
-    #                 spent=ExpressionWrapper(
-    #                     Coalesce(
-    #                         Subquery(
-    #                             category_fuel_price.annotate(total=Sum("amount")).values(
-    #                                 "total"
-    #                             )
-    #                         ),
-    #                         Value(0),
-    #                     ),
-    #                     output_field=DecimalField(),
-    #                 ),
-    #                 diff=
-    #             )
-    #         ).select_related().order_by("category__name")
+#         kwargs.update(
+#             {
+#                 "fuelprice_items": fuelpriceitem,
+#             }
+#         )
+
+#         return kwargs
+
+#     def get_form_kwargs(self):
+#         kwargs = super().get_form_kwargs()
+#         kwargs["instance"] = None
+
+#         return kwargs
+
+#     def get_success_url(self):
+#         url = reverse_lazy(
+#             "monthly_detail",
+#             kwargs={"year": self.kwargs["year"], "month": self.kwargs["month"],},
+#         )
+
+#         return url
 

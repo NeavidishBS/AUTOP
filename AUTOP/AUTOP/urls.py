@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from updates.views import RefuelingListView, MilageListView
+from updates.views import RefuelingListView
 
 
 urlpatterns = [
@@ -24,5 +24,5 @@ urlpatterns = [
     path("", include("updates.urls")),
     path("", include("vehicle.urls")),
     path("updates/", RefuelingListView.as_view(), name="refueling_list"),
-    path("milages/", MilageListView.as_view(), name="milage_list"),
+    # path("vehicle/", UpdateDetailView.as_view(), name="vehicle_detail"),
 ]

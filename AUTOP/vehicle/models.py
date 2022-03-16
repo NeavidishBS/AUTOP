@@ -34,9 +34,8 @@ class Vehicle(models.Model):
     photos = models.ImageField(upload_to='photos/%Y/%m/%d/',null=True, blank=True)
     vehicle_insurance_doc = models.FileField(upload_to='insuranse_docs//%Y/%m/%d/', null=True, blank=True)
     date_added = models.DateField(default=None, blank=False, verbose_name='Date (yyyy-mm-dd):')
-    start_milage = models.DecimalField(null=True, default=0, blank=False, max_digits=10, decimal_places=2, verbose_name='KM at stock')
+    start_milage = models.FloatField(default=0.01, blank=False, verbose_name='KM at stock')
     parking_place = models.ForeignKey(P_parking, default=None, on_delete=models.DO_NOTHING)
-    gas_type = models.ForeignKey(Fuel,on_delete=models.DO_NOTHING, max_length=20, null=False)
 
     def __str__(self):
         return f"{self.car}" + " " + self.car_index

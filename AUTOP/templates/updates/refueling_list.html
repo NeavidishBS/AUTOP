@@ -11,8 +11,12 @@
     <div>Date</div>
     <div>Vehicle</div>
     <div>Fuel</div>
-    <div>Edit</div>
-    <div>Delete</div>
+    <div>Lt. of Fuel</div>
+    <div>Milage Total</div>
+    <div>Fuel filling price</div>
+    <div>Total distance traveled</div>
+    <!-- <div>Edit</div>
+    <div>Delete</div> -->
 </div>
 {% for refueling in refuelings %}
 
@@ -20,6 +24,10 @@
     <div>{{refueling.date}}</div>
     <div>{{refueling.u_vechicle}}</div>
     <div>{{refueling.fuel}}</div>
+    <div>{{refueling.refueling}}</div>
+    <div>{{refueling.milage_total}}</div>
+    <div>{{refueling.calc}}</div>
+    <div>{{refueling.calc_m}}</div>
     <div><a href='{% url "refuel_edit" pk=refueling.id %}'>Edit</a></div>
     <div><a href='{% url "upt_delete" pk=refueling.id %}'>Delete</a></div>
 </div>
