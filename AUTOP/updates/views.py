@@ -13,6 +13,9 @@ from django.db.models import (
     ExpressionWrapper,
 )
 from django.db.models.functions import Coalesce
+from vehicle.forms import VehicleForm
+
+from vehicle.models import Vehicle
 
 
 
@@ -31,8 +34,13 @@ class RefuelingListView(ListView):
     model = refueling
     context_object_name = "refuelings"
     template_name = "refueling_list.html"
-    # for p in refueling.calc.price_p:
-    #     print(p)
+
+    # def calc_m(self):
+        # start_mil = self.u_vechicle.start_milage
+        # total_milage = refueling.objects.filter(
+        #     u_vechicle = self.u_vechicle).aggregate(driven=Sum['milage_total'])
+        # veh_total_dist = total_milage['driven'] + start_mil
+        # return veh_total_dist
 
 class RefuelingDetailView(DetailView):
     model = refueling
@@ -100,46 +108,3 @@ class RefuelAddView(TemplateView):
             return self.render_to_response({"refuel_formset": formset})
 
 
-#TEST DON'T WORKING YET
-class UpdateDetailView(CreateView):
-    model = refueling
-    context_object_name = "refuelings"
-    form_class = RefuelingForm
-    template_name = "refueling_list.html"
-
-    def get(self, request, *args, **kwargs):
-        self.object = refueling.objects.get(
-            veh__used=self.kwargs.get("u_vehicle"),
-        )
-        return self.render_to_response(self.get_context_data())
-
-    def get_context_data(self, **kwargs):
-        kwargs = super().get_context_data(**kwargs)
-
-        category_vehicle = refueling.objects.filter(
-            category=OuterRef("u_vehicle"),
-            veh__used=self.object.milage_total,
-        ).values("u_vehicle")
-        for p in category_vehicle:
-            print(p)
-
-        uptitems = (
-            (
-                refueling.objects.filter(
-                    vehicle_category=self.object)
-                .annotate(
-                    dist=ExpressionWrapper(
-                        Coalesce(
-                            Subquery(
-                                category_vehicle.annotate(total="milage_total").values(
-                                    "total"
-                                )
-                            ),
-                            Value(0),
-                        ),
-                        output_field=DecimalField(),
-                    ),
-                    diff=F("dist"),
-                )
-            ).select_related()
-        ).order_by("category__name")

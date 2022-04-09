@@ -37,12 +37,10 @@ class VehicleAddView(TemplateView):
         else:
             return self.render_to_response({"vehicle_formset": formset})
 
-# DO NOT USE
-# class VehicleDetailView(CreateView):
+# class VehicleListView(CreateView):
 #     model = Vehicle
 #     context_object_name = "vehicles"
 #     template_name = "updates/vehicle_detail.html"
-#     form_class = VehicleForm
 
 
 #     # def get(self, request, *args, **kwargs):
