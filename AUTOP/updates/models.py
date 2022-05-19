@@ -28,10 +28,13 @@ class refueling(models.Model):
         print(fuel_lt)
         fuel_total_price = fuel_lt * fuel_price
         super().save(*args, **kwargs)
-        return round(fuel_total_price)
+        return round((fuel_total_price),2)
 
     def calc_m(self):
-        variable = refueling.objects.all().filter(u_vechicle = self.u_vechicle)
+        start_mil = self.u_vechicle.start_milage
+        variable = refueling.objects.all().filter(
+            u_vechicle = self.u_vechicle
+            ).filter(id__range=(0, self.id))
         list_dist = []
         for instance in variable:
             list_dist.append(instance.milage_total)
